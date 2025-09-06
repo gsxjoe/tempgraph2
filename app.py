@@ -40,6 +40,26 @@ def update_sensors():
 # --- Flask Web Server ---
 app = Flask(__name__, template_folder='templates')
 
+# ADDED CODE____________________________________________________________________________
+# Simulate or replace this function with your own temperature reading from sensor
+def read_temperature():
+    global temperature_data
+    while True:
+       temp2 = sensor2.read_temp()
+# changed .2f to .1f to bring back only one decimal point and changed C to F for label        
+        temperature_data["sensor2"] = f"{temp2:.1f}°F" if not isinstance(temp2, float) or not temp2 is float("NaN") else "Disconnected"
+        
+# Replace with your sensor reading code
+    # For demo, random fluctuating temp near 80 C
+    #return round(80 + 10 * (0.5 - random.random()), 1)
+
+@app.route('/temp')
+def temp():
+    temperature = read_temperature()
+    timestamp = int(time.time()*1000)  # ms since epoch
+    return jsonify({'temperature': temperature, 'timestamp': timestamp})
+# END OF ADDED CODE________________________________________________________________________
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -56,5 +76,6 @@ if __name__ == '__main__':
     
     # Run the Flask web server
     app.run(host='0.0.0.0', port=5000, debug=False)
+
 
 
