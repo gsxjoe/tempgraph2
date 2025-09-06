@@ -5,13 +5,18 @@
     <meta http-equiv="refresh" content="5">
     <style>
         body { font-family: sans-serif; text-align: center; }
+    .auto-style1 {
+		font-size: xx-large;
+	}
     </style>
 </head>
-<body>
-    <h1>Raspberry Pi Temperature</h1>
+<body style="color: #FF3300; background-color: #000000">
+    <h1>Pepper's BBQ Meter</h1>
     <div id="sensor_data">
-        <p>Sensor 1: <span id="temp1">...</span></p>
-        <p>Sensor 2: <span id="temp2">...</span></p>
+        <p><span class="auto-style1">Grill&nbsp;&nbsp;&nbsp; : </span> 
+		<span id="temp1" class="auto-style1">...</span></p>
+        <p><span class="auto-style1">Meat&nbsp;&nbsp;&nbsp; : </span> 
+		<span id="temp2" class="auto-style1">...</span></p>
     </div>
     <script>
         function fetchTemp() {
