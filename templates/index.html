@@ -26,26 +26,5 @@
         setInterval(fetchTemp, 10000);
         fetchTemp(); // Initial fetch
     </script>
-
-    #added code_______________________________________________________________________________
-     <h2>Live MAX6675 Temperature</h2>
-    <img id="tempGraph" src="/plot.png" alt="Temperature Graph">
-    <p>Last updated: <span id="lastUpdated">N/A</span></p>
-
-    <script>
-        function refreshGraph() {
-            var graph = document.getElementById('tempGraph');
-            var now = new Date();
-            var lastUpdated = document.getElementById('lastUpdated');
-
-            // Add a timestamp to the image URL to prevent browser caching
-            graph.src = "/plot.png?t=" + now.getTime();
-            lastUpdated.innerText = now.toLocaleTimeString();
-        }
-
-        // Refresh the graph every 5 seconds
-        setInterval(refreshGraph, 5000);
-    </script>
-#end added______________________________________________________________________________________________
 </body>
 </html>
