@@ -31,5 +31,36 @@
         setInterval(fetchTemp, 10000);
         fetchTemp(); // Initial fetch
     </script>
+
+<title>Interactive CSV Graph</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h2>Interactive Data from CSV</h2>
+    <div id="graph-container"></div>
+    <script>
+        // Use Fetch API to get the CSV file
+        fetch('/sensor_readings.csv')
+            .then(response => response.text())
+            .then(text => {
+                const lines = text.split('\n').slice(1); // Split lines and skip header
+                const timestamps = lines.map(line => line.split(',')[0]);
+                const temperatures = lines.map(line => parseFloat(line.split(',')[1]));
+
+                const trace = {
+                    x: timestamps,
+                    y: temperatures,
+                    mode: 'lines+markers',
+                    type: 'scatter'
+                };
+                const layout = {
+                    title: 'Interactive Temperature Graph',
+                    xaxis: {title: 'Timestamp'},
+                    yaxis: {title: 'Temperature (°C)'}
+                };
+
+                Plotly.newPlot('graph-container', [trace], layout);
+            });
+    </script>
 </body>
 </html>
